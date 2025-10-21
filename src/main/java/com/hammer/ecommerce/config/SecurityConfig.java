@@ -40,10 +40,11 @@ public class SecurityConfig {
                         // Swagger/OpenAPI
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
 
-                        // Endpoints de endereços - apenas autenticados
-                        .requestMatchers("/api/addresses/**").authenticated()
-
                         // Endpoints que requerem autenticação
+                        .requestMatchers("/api/addresses/**").authenticated()
+                        .requestMatchers("/api/cart/**").authenticated()
+
+                        // Outros endpoints
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
