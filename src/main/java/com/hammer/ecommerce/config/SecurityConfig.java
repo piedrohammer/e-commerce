@@ -43,6 +43,7 @@ public class SecurityConfig {
                         // Endpoints que requerem autenticação
                         .requestMatchers("/api/addresses/**").authenticated()
                         .requestMatchers("/api/cart/**").authenticated()
+                        .requestMatchers("/api/orders/**").authenticated()
 
                         // Outros endpoints
                         .anyRequest().authenticated()
