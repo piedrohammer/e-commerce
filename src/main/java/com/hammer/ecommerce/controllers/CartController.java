@@ -2,9 +2,9 @@ package com.hammer.ecommerce.controllers;
 
 import com.hammer.ecommerce.dto.AddToCartRequestDTO;
 import com.hammer.ecommerce.dto.CartResponseDTO;
-import com.hammer.ecommerce.dto.CartService;
 import com.hammer.ecommerce.dto.UpdateCartItemRequestDTO;
 import com.hammer.ecommerce.repositories.UserRepository;
+import com.hammer.ecommerce.service.CartService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -45,8 +45,8 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    //@OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    //private Payment payment;
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Payment payment;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)

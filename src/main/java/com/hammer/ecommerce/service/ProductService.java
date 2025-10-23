@@ -8,6 +8,7 @@ import com.hammer.ecommerce.exceptions.BusinessException;
 import com.hammer.ecommerce.exceptions.ResourceNotFoundException;
 import com.hammer.ecommerce.model.Category;
 import com.hammer.ecommerce.model.Product;
+import com.hammer.ecommerce.model.Review;
 import com.hammer.ecommerce.repositories.CategoryRepository;
 import com.hammer.ecommerce.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -52,6 +53,7 @@ public class ProductService {
 
     @Transactional
     public ProductResponseDTO create(ProductRequestDTO request) {
+
         // Verificar se SKU já existe
         if (productRepository.existsBySku(request.getSku())) {
             throw new BusinessException("Já existe um produto com o SKU: " + request.getSku());
@@ -140,18 +142,21 @@ public class ProductService {
         categoryDTO.setName(product.getCategory().getName());
         dto.setCategory(categoryDTO);
 
-        // Reviews (vamos calcular depois quando criar a entidade Review)
-        //dto.setReviewCount(product.getReviews().size());
-        //dto.setAverageRating(calculateAverageRating(product));
+        // Reviews
+        dto.setReviewCount(product.getReviews().size());
+        dto.setAverageRating(calculateAverageRating(product));
 
         return dto;
     }
 
-    /*private Double calculateAverageRating(Product product) {
+    private Double calculateAverageRating(Product product) {
         if (product.getReviews().isEmpty()) {
             return 0.0;
         }
-        // Vamos implementar isso corretamente quando criar a entidade Review
-        return 0.0;
-    }*/
+
+        return product.getReviews().stream()
+                .mapToInt(Review::getRating)
+                .average()
+                .orElse(0.0);
+    }
 }

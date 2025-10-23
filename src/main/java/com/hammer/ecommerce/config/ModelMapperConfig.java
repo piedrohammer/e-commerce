@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ModelMapperConfig {
 
+
+    // para converter/mapear objetos de um tipo em outro
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();

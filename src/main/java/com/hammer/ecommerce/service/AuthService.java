@@ -27,12 +27,13 @@ public class AuthService {
 
     @Transactional
     public AuthResponseDTO register(RegisterRequestDTO request) {
-        // Verificar se email já existe
+
+        // Verifica se email já existe
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new BusinessException("Email já cadastrado");
         }
 
-        // Verificar se CPF já existe
+        // Verifica se CPF já existe
         if (userRepository.existsByCpf(request.getCpf())) {
             throw new BusinessException("CPF já cadastrado");
         }
@@ -62,6 +63,7 @@ public class AuthService {
     }
 
     public AuthResponseDTO login(LoginRequestDTO request) {
+
         // Autenticar usuário
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

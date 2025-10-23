@@ -32,6 +32,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+
                         // Endpoints públicos
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/products/**").permitAll()
@@ -40,12 +41,12 @@ public class SecurityConfig {
                         // Swagger/OpenAPI
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
 
-                        // Endpoints que requerem autenticação
+                        // Endpoints que requerem autenticação - ADMIN
                         .requestMatchers("/api/addresses/**").authenticated()
                         .requestMatchers("/api/cart/**").authenticated()
                         .requestMatchers("/api/orders/**").authenticated()
+                        .requestMatchers("/api/payments/**").authenticated()
 
-                        // Outros endpoints
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
@@ -57,6 +58,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // criptografar senha
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

@@ -37,6 +37,7 @@ public class CategoryService {
 
     @Transactional
     public CategoryResponseDTO create(CategoryRequestDTO request) {
+
         // Verificar se já existe categoria com esse nome
         if (categoryRepository.existsByName(request.getName())) {
             throw new BusinessException("Já existe uma categoria com o nome: " + request.getName());

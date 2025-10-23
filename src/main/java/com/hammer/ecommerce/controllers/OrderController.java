@@ -2,10 +2,10 @@ package com.hammer.ecommerce.controllers;
 
 import com.hammer.ecommerce.dto.CreateOrderRequestDTO;
 import com.hammer.ecommerce.dto.OrderResponseDTO;
-import com.hammer.ecommerce.dto.OrderService;
 import com.hammer.ecommerce.dto.OrderSummaryDTO;
 import com.hammer.ecommerce.model.OrderStatus;
 import com.hammer.ecommerce.repositories.UserRepository;
+import com.hammer.ecommerce.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -65,7 +65,7 @@ public class OrderController {
         return ResponseEntity.ok(order);
     }
 
-    // Endpoints ADMIN
+    // -------- Endpoints ADMIN --------
 
     @GetMapping("/admin/all")
     @PreAuthorize("hasRole('ADMIN')")

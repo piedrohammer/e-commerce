@@ -1,5 +1,6 @@
-package com.hammer.ecommerce.dto;
+package com.hammer.ecommerce.service;
 
+import com.hammer.ecommerce.dto.*;
 import com.hammer.ecommerce.exceptions.BusinessException;
 import com.hammer.ecommerce.exceptions.ResourceNotFoundException;
 import com.hammer.ecommerce.model.*;
@@ -27,6 +28,7 @@ public class OrderService {
 
     @Transactional
     public OrderResponseDTO createOrder(Long userId, CreateOrderRequestDTO request) {
+
         // Buscar usuário
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
@@ -142,7 +144,7 @@ public class OrderService {
         return convertToDTO(order);
     }
 
-    // Métodos para ADMIN
+    // -------- Métodos para ADMIN --------
 
     @Transactional(readOnly = true)
     public Page<OrderSummaryDTO> findAll(Pageable pageable) {

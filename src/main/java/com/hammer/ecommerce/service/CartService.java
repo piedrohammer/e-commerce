@@ -1,5 +1,9 @@
-package com.hammer.ecommerce.dto;
+package com.hammer.ecommerce.service;
 
+import com.hammer.ecommerce.dto.AddToCartRequestDTO;
+import com.hammer.ecommerce.dto.CartItemResponseDTO;
+import com.hammer.ecommerce.dto.CartResponseDTO;
+import com.hammer.ecommerce.dto.UpdateCartItemRequestDTO;
 import com.hammer.ecommerce.exceptions.BusinessException;
 import com.hammer.ecommerce.exceptions.ResourceNotFoundException;
 import com.hammer.ecommerce.model.Cart;
@@ -38,17 +42,17 @@ public class CartService {
         Product product = productRepository.findById(request.getProductId())
                 .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado"));
 
-        // Verificar se produto está ativo
+        // Verifica se produto está ativo
         if (!product.getActive()) {
             throw new BusinessException("Produto não está disponível");
         }
 
-        // Verificar estoque
+        // Verifica estoque
         if (product.getStockQuantity() < request.getQuantity()) {
             throw new BusinessException("Estoque insuficiente. Disponível: " + product.getStockQuantity());
         }
 
-        // Verificar se o item já existe no carrinho
+        // Verifica se o item já existe no carrinho
         CartItem existingItem = cartItemRepository
                 .findByCartIdAndProductId(cart.getId(), product.getId())
                 .orElse(null);
@@ -57,7 +61,7 @@ public class CartService {
             // Atualizar quantidade
             int newQuantity = existingItem.getQuantity() + request.getQuantity();
 
-            // Verificar estoque novamente
+            // Verifica estoque novamente
             if (product.getStockQuantity() < newQuantity) {
                 throw new BusinessException("Estoque insuficiente. Disponível: " + product.getStockQuantity());
             }
@@ -86,7 +90,7 @@ public class CartService {
         CartItem cartItem = cartItemRepository.findById(itemId)
                 .orElseThrow(() -> new ResourceNotFoundException("Item não encontrado no carrinho"));
 
-        // Verificar se o item pertence ao carrinho do usuário
+        // Verifica se o item pertence ao carrinho do usuário
         if (!cartItem.getCart().getId().equals(cart.getId())) {
             throw new BusinessException("Item não pertence ao seu carrinho");
         }
@@ -111,7 +115,7 @@ public class CartService {
         CartItem cartItem = cartItemRepository.findById(itemId)
                 .orElseThrow(() -> new ResourceNotFoundException("Item não encontrado no carrinho"));
 
-        // Verificar se o item pertence ao carrinho do usuário
+        // Verifica se o item pertence ao carrinho do usuário
         if (!cartItem.getCart().getId().equals(cart.getId())) {
             throw new BusinessException("Item não pertence ao seu carrinho");
         }
