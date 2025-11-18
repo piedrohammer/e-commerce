@@ -1,7 +1,7 @@
 package com.hammer.ecommerce;
 
-import com.hammer.ecommerce.dto.AddressRequestDTO;
-import com.hammer.ecommerce.dto.AddressResponseDTO;
+import com.hammer.ecommerce.dto.address.AddressRequestDTO;
+import com.hammer.ecommerce.dto.address.AddressResponseDTO;
 import com.hammer.ecommerce.exceptions.BusinessException;
 import com.hammer.ecommerce.exceptions.ResourceNotFoundException;
 import com.hammer.ecommerce.model.Address;

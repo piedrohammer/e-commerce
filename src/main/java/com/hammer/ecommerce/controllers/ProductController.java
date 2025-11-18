@@ -1,13 +1,12 @@
 package com.hammer.ecommerce.controllers;
 
-import com.hammer.ecommerce.dto.ProductRequestDTO;
-import com.hammer.ecommerce.dto.ProductResponseDTO;
-import com.hammer.ecommerce.dto.ProductUpdateDTO;
+import com.hammer.ecommerce.dto.product.ProductRequestDTO;
+import com.hammer.ecommerce.dto.product.ProductResponseDTO;
+import com.hammer.ecommerce.dto.product.ProductUpdateDTO;
 import com.hammer.ecommerce.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;

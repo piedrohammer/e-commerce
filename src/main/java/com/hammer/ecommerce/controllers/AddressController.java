@@ -1,7 +1,7 @@
 package com.hammer.ecommerce.controllers;
 
-import com.hammer.ecommerce.dto.AddressRequestDTO;
-import com.hammer.ecommerce.dto.AddressResponseDTO;
+import com.hammer.ecommerce.dto.address.AddressRequestDTO;
+import com.hammer.ecommerce.dto.address.AddressResponseDTO;
 import com.hammer.ecommerce.repositories.UserRepository;
 import com.hammer.ecommerce.service.AddressService;
 import io.swagger.v3.oas.annotations.Operation;

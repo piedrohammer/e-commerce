@@ -1,7 +1,7 @@
 package com.hammer.ecommerce.controllers;
 
-import com.hammer.ecommerce.dto.PaymentResponseDTO;
-import com.hammer.ecommerce.dto.ProcessPaymentRequestDTO;
+import com.hammer.ecommerce.dto.payment.PaymentResponseDTO;
+import com.hammer.ecommerce.dto.payment.ProcessPaymentRequestDTO;
 import com.hammer.ecommerce.repositories.UserRepository;
 import com.hammer.ecommerce.service.PaymentService;
 import io.swagger.v3.oas.annotations.Operation;

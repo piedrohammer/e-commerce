@@ -1,7 +1,7 @@
 package com.hammer.ecommerce.service;
 
-import com.hammer.ecommerce.dto.PaymentResponseDTO;
-import com.hammer.ecommerce.dto.ProcessPaymentRequestDTO;
+import com.hammer.ecommerce.dto.payment.PaymentResponseDTO;
+import com.hammer.ecommerce.dto.payment.ProcessPaymentRequestDTO;
 import com.hammer.ecommerce.exceptions.BusinessException;
 import com.hammer.ecommerce.exceptions.ResourceNotFoundException;
 import com.hammer.ecommerce.model.*;

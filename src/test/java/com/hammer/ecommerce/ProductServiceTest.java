@@ -1,8 +1,8 @@
 package com.hammer.ecommerce;
 
-import com.hammer.ecommerce.dto.ProductRequestDTO;
-import com.hammer.ecommerce.dto.ProductResponseDTO;
-import com.hammer.ecommerce.dto.ProductUpdateDTO;
+import com.hammer.ecommerce.dto.product.ProductRequestDTO;
+import com.hammer.ecommerce.dto.product.ProductResponseDTO;
+import com.hammer.ecommerce.dto.product.ProductUpdateDTO;
 import com.hammer.ecommerce.exceptions.BusinessException;
 import com.hammer.ecommerce.exceptions.ResourceNotFoundException;
 import com.hammer.ecommerce.model.Category;

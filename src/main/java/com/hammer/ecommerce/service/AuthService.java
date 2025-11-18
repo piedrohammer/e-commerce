@@ -1,8 +1,8 @@
 package com.hammer.ecommerce.service;
 
-import com.hammer.ecommerce.dto.AuthResponseDTO;
-import com.hammer.ecommerce.dto.LoginRequestDTO;
-import com.hammer.ecommerce.dto.RegisterRequestDTO;
+import com.hammer.ecommerce.dto.login.AuthResponseDTO;
+import com.hammer.ecommerce.dto.login.LoginRequestDTO;
+import com.hammer.ecommerce.dto.login.RegisterRequestDTO;
 import com.hammer.ecommerce.exceptions.BusinessException;
 import com.hammer.ecommerce.model.Role;
 import com.hammer.ecommerce.model.User;

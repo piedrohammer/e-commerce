@@ -1,7 +1,7 @@
 package com.hammer.ecommerce.controllers;
 
-import com.hammer.ecommerce.dto.CategoryRequestDTO;
-import com.hammer.ecommerce.dto.CategoryResponseDTO;
+import com.hammer.ecommerce.dto.category.CategoryRequestDTO;
+import com.hammer.ecommerce.dto.category.CategoryResponseDTO;
 import com.hammer.ecommerce.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

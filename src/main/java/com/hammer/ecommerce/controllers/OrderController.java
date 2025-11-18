@@ -1,8 +1,8 @@
 package com.hammer.ecommerce.controllers;
 
-import com.hammer.ecommerce.dto.CreateOrderRequestDTO;
-import com.hammer.ecommerce.dto.OrderResponseDTO;
-import com.hammer.ecommerce.dto.OrderSummaryDTO;
+import com.hammer.ecommerce.dto.order.CreateOrderRequestDTO;
+import com.hammer.ecommerce.dto.order.OrderResponseDTO;
+import com.hammer.ecommerce.dto.order.OrderSummaryDTO;
 import com.hammer.ecommerce.model.OrderStatus;
 import com.hammer.ecommerce.repositories.UserRepository;
 import com.hammer.ecommerce.service.OrderService;

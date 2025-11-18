@@ -1,9 +1,9 @@
 package com.hammer.ecommerce.controllers;
 
-import com.hammer.ecommerce.dto.CreateReviewRequestDTO;
-import com.hammer.ecommerce.dto.ProductRatingDTO;
-import com.hammer.ecommerce.dto.ReviewResponseDTO;
-import com.hammer.ecommerce.dto.UpdateReviewRequestDTO;
+import com.hammer.ecommerce.dto.review.CreateReviewRequestDTO;
+import com.hammer.ecommerce.dto.product.ProductRatingDTO;
+import com.hammer.ecommerce.dto.review.ReviewResponseDTO;
+import com.hammer.ecommerce.dto.review.UpdateReviewRequestDTO;
 import com.hammer.ecommerce.repositories.UserRepository;
 import com.hammer.ecommerce.service.ReviewService;
 import io.swagger.v3.oas.annotations.Operation;

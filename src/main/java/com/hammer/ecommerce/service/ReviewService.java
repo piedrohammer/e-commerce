@@ -1,9 +1,9 @@
 package com.hammer.ecommerce.service;
 
-import com.hammer.ecommerce.dto.CreateReviewRequestDTO;
-import com.hammer.ecommerce.dto.ProductRatingDTO;
-import com.hammer.ecommerce.dto.ReviewResponseDTO;
-import com.hammer.ecommerce.dto.UpdateReviewRequestDTO;
+import com.hammer.ecommerce.dto.review.CreateReviewRequestDTO;
+import com.hammer.ecommerce.dto.product.ProductRatingDTO;
+import com.hammer.ecommerce.dto.review.ReviewResponseDTO;
+import com.hammer.ecommerce.dto.review.UpdateReviewRequestDTO;
 import com.hammer.ecommerce.exceptions.BusinessException;
 import com.hammer.ecommerce.exceptions.ResourceNotFoundException;
 import com.hammer.ecommerce.model.OrderStatus;

@@ -1,8 +1,8 @@
 package com.hammer.ecommerce.controllers;
 
-import com.hammer.ecommerce.dto.AuthResponseDTO;
-import com.hammer.ecommerce.dto.LoginRequestDTO;
-import com.hammer.ecommerce.dto.RegisterRequestDTO;
+import com.hammer.ecommerce.dto.login.AuthResponseDTO;
+import com.hammer.ecommerce.dto.login.LoginRequestDTO;
+import com.hammer.ecommerce.dto.login.RegisterRequestDTO;
 import com.hammer.ecommerce.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

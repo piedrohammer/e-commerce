@@ -1,8 +1,8 @@
 package com.hammer.ecommerce.controllers;
 
-import com.hammer.ecommerce.dto.AddToCartRequestDTO;
-import com.hammer.ecommerce.dto.CartResponseDTO;
-import com.hammer.ecommerce.dto.UpdateCartItemRequestDTO;
+import com.hammer.ecommerce.dto.cart.AddToCartRequestDTO;
+import com.hammer.ecommerce.dto.cart.CartResponseDTO;
+import com.hammer.ecommerce.dto.cart.UpdateCartItemRequestDTO;
 import com.hammer.ecommerce.repositories.UserRepository;
 import com.hammer.ecommerce.service.CartService;
 import io.swagger.v3.oas.annotations.Operation;
