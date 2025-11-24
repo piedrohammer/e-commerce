@@ -37,7 +37,7 @@ public class CategoryController {
     }
 
     @Operation(summary = "Buscar categoria por ID",
-            description = "Retorna os detalhes de uma categoria específica")
+            description = "Retorna os detalhe de uma categoria específica")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Categoria encontrada"),
             @ApiResponse(responseCode = "404", description = "Categoria não encontrada", content = @Content)

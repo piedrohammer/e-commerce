@@ -40,7 +40,7 @@ public class CartController {
     }
 
     @Operation(summary = "Adicionar produto ao carrinho",
-            description = "Adiciona um produto ao carrinho ou incrementa a quantidade se já existir")
+            description = "Adiciona produto ao carrinho ou incrementa a quantidade se já existir")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Produto adicionado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Estoque insuficiente ou produto inválido", content = @Content),

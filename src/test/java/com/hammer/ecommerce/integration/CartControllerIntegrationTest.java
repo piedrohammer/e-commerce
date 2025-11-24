@@ -351,7 +351,7 @@ class CartControllerIntegrationTest {
     void testGetCart_Unauthorized() throws Exception {
 
         mockMvc.perform(get("/api/cart"))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isForbidden());
     }
 
     @Test

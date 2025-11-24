@@ -13,6 +13,8 @@ import java.util.Arrays;
 @Slf4j
 public class LoggingAspect {
 
+    //Confi log
+
     @Pointcut("within(@org.springframework.web.bind.annotation.RestController *)")
     public void springBeanPointcut() {
         // Pointcut para todos os controllers

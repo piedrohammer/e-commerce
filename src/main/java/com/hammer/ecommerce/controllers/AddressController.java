@@ -33,7 +33,7 @@ public class AddressController {
     private final UserRepository userRepository;
 
     @Operation(summary = "Listar meus endereços",
-            description = "Retorna todos os endereços cadastrados pelo usuário autenticado")
+            description = "Retorna todos os endereços cadastrado pelo usuário autenticado")
     @ApiResponse(responseCode = "200", description = "Lista de endereços retornada com sucesso")
     @GetMapping
     public ResponseEntity<List<AddressResponseDTO>> findAll(Authentication authentication) {

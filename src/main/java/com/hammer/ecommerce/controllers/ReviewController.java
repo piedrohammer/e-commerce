@@ -119,7 +119,7 @@ public class ReviewController {
     }
 
     @Operation(summary = "Deletar avaliação",
-            description = "Remove a avaliação do usuário para o produto. Apenas o autor da avaliação pode deletá-la",
+            description = "Remove a avaliação do usuário para produto. Apenas o autor da avaliação pode deletá-la",
             security = @SecurityRequirement(name = "bearerAuth"))
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Avaliação deletada com sucesso"),

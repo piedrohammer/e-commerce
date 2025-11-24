@@ -43,7 +43,8 @@
         </encoder>
     </appender>
 
-    <!-- Development Profile -->
+
+    <!-- Development Profile's -->
     <springProfile name="dev">
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>

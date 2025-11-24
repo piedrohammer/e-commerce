@@ -3,6 +3,7 @@ package com.hammer.ecommerce.integration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hammer.ecommerce.dto.cart.AddToCartRequestDTO;
 import com.hammer.ecommerce.dto.address.AddressRequestDTO;
+import com.hammer.ecommerce.dto.login.LoginRequestDTO;
 import com.hammer.ecommerce.dto.order.CreateOrderRequestDTO;
 import com.hammer.ecommerce.dto.login.RegisterRequestDTO;
 import com.hammer.ecommerce.model.*;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
@@ -56,6 +58,10 @@ class OrderControllerIntegrationTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    private String adminToken;
     private String authToken;
     private Product product;
     private Long addressId;
@@ -78,6 +84,25 @@ class OrderControllerIntegrationTest {
         registerRequest.setPassword("senha123");
         registerRequest.setCpf("12345678901");
         registerRequest.setPhone("11999999999");
+
+        User admin = new User();
+        admin.setName("Admin");
+        admin.setEmail("admin@email.com");
+        admin.setPassword(passwordEncoder.encode("senha123"));
+        admin.setRole(Role.ADMIN);
+        userRepository.save(admin);
+
+        LoginRequestDTO loginAdmin = new LoginRequestDTO();
+        loginAdmin.setEmail("admin@email.com");
+        loginAdmin.setPassword("senha123");
+
+        MvcResult adminLoginResult = mockMvc.perform(post("/api/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(loginAdmin)))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        adminToken = objectMapper.readTree(adminLoginResult.getResponse().getContentAsString()).get("token").asText();
 
         MvcResult result = mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -172,15 +197,53 @@ class OrderControllerIntegrationTest {
     @DisplayName("Deve retornar 400 ao criar pedido com carrinho vazio")
     void testCreateOrder_EmptyCart() throws Exception {
 
-        CreateOrderRequestDTO orderRequest = new CreateOrderRequestDTO();
-        orderRequest.setShippingAddressId(addressId);
+        // Registrar usuário -> Precisa Registra um usuário antes
+        RegisterRequestDTO registerRequest = new RegisterRequestDTO();
+        registerRequest.setName("Usuário Teste");
+        registerRequest.setEmail("teste@example.com");
+        registerRequest.setPassword("123456");
+        registerRequest.setCpf("39053344705"); // CPF válido -> (CPF válido para passar no teste de criação)
 
-        mockMvc.perform(post("/api/orders")
+        mockMvc.perform(post("/api/auth/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(registerRequest)))
+                .andExpect(status().isCreated());
+
+        // Fazer login para obter token correto
+        LoginRequestDTO login = new LoginRequestDTO();
+        login.setEmail("teste@example.com");
+        login.setPassword("123456");
+
+        MvcResult loginResult = mockMvc.perform(post("/api/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(login)))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String authToken = objectMapper.readTree(loginResult.getResponse().getContentAsString())
+                .get("token").asText();
+
+        // Garantir que o carrinho existe (será criado automaticamente)
+        mockMvc.perform(get("/api/cart")
+                        .header("Authorization", "Bearer " + authToken))
+                .andExpect(status().isOk());
+
+        // Criar DTO do pedido
+        CreateOrderRequestDTO orderRequest = new CreateOrderRequestDTO();
+        orderRequest.setShippingAddressId(1L); // coloque um ID válido
+
+        // Chamar criação de pedido
+        MvcResult result = mockMvc.perform(post("/api/orders")
                         .header("Authorization", "Bearer " + authToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(orderRequest)))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message").value("Carrinho está vazio"));
+                .andExpect(jsonPath("$.message").value("Carrinho está vazio"))
+                .andReturn();
+
+        // Prints opcionais para debug
+        System.out.println("STATUS: " + result.getResponse().getStatus());
+        System.out.println("BODY: " + result.getResponse().getContentAsString());
     }
 
     @Test
@@ -316,29 +379,30 @@ class OrderControllerIntegrationTest {
 
     @Test
     @DisplayName("Admin deve listar todos os pedidos")
-    @WithMockUser(roles = "ADMIN")
     void testListAllOrders_Admin() throws Exception {
 
         createOrder();
         createOrder();
 
-        mockMvc.perform(get("/api/orders/admin/all"))
+        mockMvc.perform(get("/api/orders/admin/all")
+                        .header("Authorization", "Bearer " + adminToken))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content", hasSize(greaterThanOrEqualTo(2))));
     }
 
     @Test
     @DisplayName("Admin deve atualizar status do pedido")
-    @WithMockUser(roles = "ADMIN")
     void testUpdateOrderStatus_Admin() throws Exception {
 
         Long orderId = createOrder();
 
         mockMvc.perform(put("/api/orders/" + orderId + "/status")
+                .header("Authorization", "Bearer " + adminToken)
                         .param("status", "PAID"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("PAID"));
     }
+
 
     @Test
     @DisplayName("Deve retornar 403 ao acessar endpoints admin como CUSTOMER")

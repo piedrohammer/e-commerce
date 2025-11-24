@@ -84,7 +84,7 @@ public class ProductController {
     }
 
     @Operation(summary = "Criar produto",
-            description = "Cria um novo produto (requer permissão ADMIN)",
+            description = "Cria um novo produto (requer a permissão ADMIN)",
             security = @SecurityRequirement(name = "bearerAuth"))
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Produto criado com sucesso"),

@@ -111,7 +111,7 @@ public class OrderController {
         return ResponseEntity.ok(order);
     }
 
-    // -------- Endpoints ADMIN --------
+    // -------- Endpoints ADMIN ----------
 
     @Operation(summary = "[ADMIN] Listar todos os pedidos",
             description = "Retorna todos os pedidos do sistema com paginação (apenas ADMIN)")

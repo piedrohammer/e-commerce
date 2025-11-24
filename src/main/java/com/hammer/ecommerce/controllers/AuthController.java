@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Autenticação", description = "Endpoints para autenticação e registro de usuários")
 public class AuthController {
 
+    //Para ter usário ADMIN precisa mudar no banco de dados
     private final AuthService authService;
 
     @Operation(summary = "Registrar novo usuário",

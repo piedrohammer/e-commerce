@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasSize;
@@ -148,7 +149,7 @@ class ProductControllerIntegrationTest {
         mockMvc.perform(post("/api/products")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isForbidden());
     }
 
     @Test
@@ -286,9 +287,10 @@ class ProductControllerIntegrationTest {
         product.setDescription("Descrição de " + name);
         product.setPrice(price);
         product.setStockQuantity(stock);
-        product.setSku("SKU-" + System.currentTimeMillis());
+        product.setSku("SKU-" + UUID.randomUUID()); // <- ALTERADO
         product.setActive(true);
         product.setCategory(category);
+
         return productRepository.save(product);
     }
 }

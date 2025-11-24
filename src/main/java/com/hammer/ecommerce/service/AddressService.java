@@ -143,7 +143,7 @@ public class AddressService {
             throw new BusinessException("CEP inválido");
         }
 
-        // Formata como 00000-000
+        // Formata para o padrão como 00000-000
         return cleaned.substring(0, 5) + "-" + cleaned.substring(5);
     }
 }

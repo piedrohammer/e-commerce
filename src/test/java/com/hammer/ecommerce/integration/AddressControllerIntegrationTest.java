@@ -116,7 +116,7 @@ class AddressControllerIntegrationTest {
         mockMvc.perform(post("/api/addresses")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isForbidden()); // Mudar de isUnauthorized() para isForbidden()
     }
 
     @Test

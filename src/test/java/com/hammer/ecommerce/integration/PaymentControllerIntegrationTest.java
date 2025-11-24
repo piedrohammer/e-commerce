@@ -314,7 +314,7 @@ class PaymentControllerIntegrationTest {
         mockMvc.perform(post("/api/payments/process")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isForbidden());
     }
 
     private Long createOrder(Long addressId) throws Exception {

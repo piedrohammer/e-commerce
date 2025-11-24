@@ -31,7 +31,7 @@ public class PaymentController {
     private final UserRepository userRepository;
 
     @Operation(summary = "Processar pagamento",
-            description = "Processa o pagamento de um pedido. Aceita múltiplos métodos: PIX, Cartão de Crédito, Cartão de Débito e Boleto. " +
+            description = "Processa o pagamento de um pedido. Aceita vários métodos: PIX, Cartão de Crédito, Cartão de Débito e Boleto. " +
                     "O sistema simula a aprovação (90% de chance). Quando aprovado, o pedido é automaticamente atualizado para status PAID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Pagamento processado com sucesso",
